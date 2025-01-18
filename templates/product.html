@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/css/style.css">
+    <title>{{ product.name }} - FashionFusion</title>
+</head>
+<body>
+    <h1>{{ product.name }}</h1>
+    <img src="{{ product.image_url }}" alt="{{ product.name }}" class="product-image-small">
+    <p>{{ product.description }}</p>
+    <p><strong>Price:</strong> ${{ product.price }}</p>
+
+    <h2>Reviews</h2>
+    {% for review in product.reviews %}
+        <div class="review">
+            <p>{{ review.review }}</p>
+            <p><strong>Sentiment:</strong> {{ review.sentiment }}</p>
+        </div>
+    {% else %}
+        <p>No reviews yet.</p>
+    {% endfor %}
+
+    <h2>Submit a Review</h2>
+    <textarea id="review-input" rows="4" cols="50" placeholder="Enter your review"></textarea><br>
+    <button onclick="analyzeReview()">Analyze Review</button>
+
+    <div id="analysis-result"></div>
+
+    <form method="POST" action="{{ url_for('submit_review', product_id=product.id) }}">
+        <input type="hidden" name="review" id="review" />
+        <button type="submit">Submit Review</button>
+    </form>
+
+    <br>
+    <a href="{{ url_for('index') }}">Back to product list</a>
+
+    <script src="/static/js/script.js"></script>
+</body>
+</html>
