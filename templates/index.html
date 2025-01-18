@@ -7,7 +7,13 @@
     <title>FashionFusion - Product Listing</title>
 </head>
 <body>
-    <h1>Welcome to FashionFusion</h1>
+    <!-- Banner Section -->
+    <div class="banner">
+        <img src="/static/images/banner.jpeg"  class="banner-image">
+    </div>
+
+    <!-- Product Listing -->
+    <h1>Our Exclusive Collection</h1>
     <div class="product-list">
         {% for product in products %}
             <div class="product">
@@ -15,18 +21,19 @@
                 <h2>{{ product.name }}</h2>
                 <p>{{ product.description }}</p>
                 <p><strong>Price:</strong> ${{ product.price }}</p>
-                <a href="{{ url_for('product', product_id=product.id) }}">View Details</a>
+                <a href="{{ url_for('product', product_id=product.id) }}" class="view-details-btn">View Details</a>
             </div>
         {% endfor %}
     </div>
 
+    <!-- Pagination -->
     <div class="pagination">
         {% if page > 1 %}
-            <a href="{{ url_for('index', page=page-1) }}">Previous</a>
+            <a href="{{ url_for('index', page=page-1) }}" class="pagination-link">Previous</a>
         {% endif %}
-        <span>Page {{ page }} of {{ total_pages }}</span>
+        <span class="pagination-info">Page {{ page }} of {{ total_pages }}</span>
         {% if page < total_pages %}
-            <a href="{{ url_for('index', page=page+1) }}">Next</a>
+            <a href="{{ url_for('index', page=page+1) }}" class="pagination-link">Next</a>
         {% endif %}
     </div>
 </body>
